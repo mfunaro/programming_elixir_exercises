@@ -43,4 +43,18 @@ defmodule MyList do
       filter(tail, func)
     end
   end
+
+  def take([], _), do: []
+  def take([head|tail], num) when num == 0, do: []
+  def take([head | tail], num) when num > 0 do
+    [head | take(tail, num - 1)]
+  end
+
+  def split(list, num), do: split(list, [], num)
+  def split([], front, _), do: [Enum.reverse(front), []]
+  def split(tail, front, 0), do: [Enum.reverse(front), tail]
+  def split([head|tail], front, num) do
+    split(tail, [head|front], num - 1)
+  end
+
 end
